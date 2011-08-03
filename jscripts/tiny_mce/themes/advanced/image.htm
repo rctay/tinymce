@@ -11,12 +11,20 @@
 <form onsubmit="ImageDialog.update();return false;" action="#">
 	<div class="tabs">
 		<ul>
-			<li id="existing_tab" class="current"><span><a href="javascript:mcTabs.displayTab('existing_tab','existing_panel');" onmousedown="return false;">{#advanced_dlg.image_existing_title}</a></span></li>
+			<li id="upload_tab" class="current"><span><a href="javascript:mcTabs.displayTab('upload_tab','upload_panel');" onmousedown="return false;">{#advanced_dlg.image_upload_title}</a></span></li>
+			<li id="existing_tab"><span><a href="javascript:mcTabs.displayTab('existing_tab','existing_panel');" onmousedown="return false;">{#advanced_dlg.image_existing_title}</a></span></li>
 		</ul>
 	</div>
 
 	<div class="panel_wrapper">
-		<div id="existing_panel" class="panel current">
+		<div id="upload_panel" class="panel current">
+			<table border="0" cellpadding="4" cellspacing="0">
+				<tr>
+					<td class="nowrap"><label for="src">{#advanced_dlg.image_upload_title}</label></td>
+					<td><input type="file" id="upload_src" name="upload_src"/></td>
+				</tr>
+		</div>
+		<div id="existing_panel" class="panel">
 			<table border="0" cellpadding="4" cellspacing="0">
 				<tr>
 					<td class="nowrap"><label for="src">{#advanced_dlg.image_src}</label></td>
