@@ -1,17 +1,16 @@
 diff --git a/build.xml b/build.xml
-index 159c314..31c1d7b 100644
+index 159c314..d903413 100644
 --- a/build.xml
 +++ b/build.xml
-@@ -163,6 +163,18 @@
+@@ -163,6 +163,17 @@
  		<!-- Compress themes -->
  		<yuicompress infile="${build_dir}/themes/simple/editor_template_src.js" outfile="${build_dir}/themes/simple/editor_template.js" />
  		<yuicompress infile="${build_dir}/themes/advanced/editor_template_src.js" outfile="${build_dir}/themes/advanced/editor_template.js" />
-+		<delete>
-+			<fileset dir="${build_dir}/themes/advanced/js/" includes="*.min.js" />
-+		</delete>
 +		<for param="file">
 +			<path>
-+				<fileset dir="${build_dir}/themes/advanced/js/" includes="*.js" />
++				<fileset dir="${build_dir}/themes/advanced/js/">
++					<filename regex="(?&lt;!.min)\.js$" />
++				</fileset>
 +			</path>
 +			<sequential>
 +				<propertyregex property="file.compressed" input="@{file}" regexp="\.js$" replace=".min.js" override="yes" />
@@ -21,7 +20,7 @@ index 159c314..31c1d7b 100644
  
  		<!-- Compress plugins -->
  		<for param="file">
-@@ -206,8 +218,17 @@
+@@ -206,8 +217,17 @@
  				<exclude name="**/.*/**"/>
  				<exclude name="**/.*"/>
  				<exclude name="build-utils/**" />
