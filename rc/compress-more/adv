@@ -1,3 +1,8 @@
+build.xml: compress themes/advanced/js/* too
+
+After compressing to *.min.js, we rename it back to *.js so that
+we don't break existing usage (due to reliance on *.js not *.min.js).
+
 diff --git a/build.xml b/build.xml
 index 159c314..d903413 100644
 --- a/build.xml
