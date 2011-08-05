@@ -1,3 +1,8 @@
+build.xml: compress plugins/*/js/*.js too
+
+Again, after compressing to *.min.js, rename to *.js for
+backward-compatibility.
+
 diff --git a/build.xml b/build.xml
 index d903413..4ca9a88 100644
 --- a/build.xml
