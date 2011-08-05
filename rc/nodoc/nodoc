@@ -1,5 +1,5 @@
 diff --git a/build.xml b/build.xml
-index 159c314..b649f78 100644
+index 159c314..d3999e4 100644
 --- a/build.xml
 +++ b/build.xml
 @@ -37,7 +37,7 @@
@@ -7,7 +7,7 @@ index 159c314..b649f78 100644
  
  	<!-- Generate JS documentation -->
 -	<target name="moxiedoc" depends="" description="Generates HTML documentation out of js source">
-+	<target name="moxiedoc" depends="" description="Generates HTML documentation out of js source" unless="nodoc">
++	<target name="moxiedoc" depends="" description="Generates HTML documentation out of js source" unless="nomoxiedoc">
  		<mkdir dir="docs"/>
  		<delete quiet="true">
  			<fileset dir="docs/api" includes="**/*"/>
