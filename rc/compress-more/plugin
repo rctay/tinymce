@@ -1,0 +1,42 @@
+diff --git a/build.xml b/build.xml
+index d903413..9234805 100644
+--- a/build.xml
++++ b/build.xml
+@@ -186,6 +186,19 @@
+ 			</sequential>
+ 		</for>
+ 
++		<delete>
++			<fileset dir="${build_dir}/plugins/" includes="**/js/*.min.js" />
++		</delete>
++		<for param="file">
++			<path>
++				<fileset dir="${build_dir}/plugins/" includes="**/js/*.js" />
++			</path>
++			<sequential>
++				<propertyregex property="file.compressed" input="@{file}" regexp="\.js$" replace=".min.js" override="yes" />
++				<yuicompress infile="@{file}" outfile="${file.compressed}" />
++			</sequential>
++		</for>
++
+ 		<!-- Compress jQuery plugin -->
+ 		<yuicompress infile="${classes_dir}/adapter/jquery/jquery.tinymce.js" outfile="${build_dir}/jquery.tinymce.js" />
+ 
+@@ -217,14 +230,17 @@
+ 				<exclude name="**/.*/**"/>
+ 				<exclude name="**/.*"/>
+ 				<exclude name="build-utils/**" />
++
+ 				<!-- let the other FileSet take care of it -->
+ 				<exclude name="jscripts/tiny_mce/themes/advanced/js/*" />
++				<exclude name="jscripts/tiny_mce/plugins/**/js/*" />
+ 			</fileset>
+ 		</copy>
+ 
+ 		<move todir="${temp_dir}/tinymce">
+ 			<fileset dir=".">
+ 				<include name="jscripts/tiny_mce/themes/advanced/js/*.min.js" />
++				<include name="jscripts/tiny_mce/plugins/**/js/*.min.js" />
+ 			</fileset>
+ 			<mapper type="glob" from="*.min.js" to="*.js" />
+ 		</move>
