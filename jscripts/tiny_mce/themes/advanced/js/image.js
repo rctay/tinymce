@@ -8,6 +8,26 @@ var ImageDialog = {
 			document.write('<script language="javascript" type="text/javascript" src="' + tinyMCEPopup.editor.documentBaseURI.toAbsolute(url) + '"></script>');
 	},
 
+	init_upload: function() {
+		var get_url = (function(re, dec) {
+			return function() {
+				var str = window.location.search.substring(1);
+				var m;
+				while (m = re.exec(str))
+					if (m[1] == "url")
+						return dec(m[2]);
+				return null;
+			};
+		})(/([^&=]+)=?([^&]*)/g,
+			function (s) { return decodeURIComponent(s); });
+
+		var f = document.forms[0], v = get_url();
+		if (v == null)
+			return;
+		f.src.value = v;
+		this.update();
+	},
+
 	init : function() {
 		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
@@ -34,6 +54,8 @@ var ImageDialog = {
 			selectByValue(f, 'align', this.getAttrib(e, 'align'));
 			this.updateStyle();
 		}
+
+		this.init_upload();
 	},
 
 	fillFileList : function(id, l) {
