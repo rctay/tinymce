@@ -1,28 +1,31 @@
 diff --git a/build.xml b/build.xml
-index d903413..9234805 100644
+index d903413..4ca9a88 100644
 --- a/build.xml
 +++ b/build.xml
-@@ -186,6 +186,19 @@
+@@ -179,9 +179,21 @@
+ 		<for param="file">
+ 			<path>
+ 				<fileset dir="${build_dir}/plugins/" includes="*/editor_plugin_src.js" />
++				<fileset dir="${build_dir}/plugins/">
++					<include name="**/js/*.js" />
++					<filename regex="(?&lt;!.min)\.js$" />
++				</fileset>
+ 			</path>
+ 			<sequential>
+-				<propertyregex property="file.compressed" input="@{file}" regexp="_src.js$" replace=".js" override="yes" />
++				<if>
++					<matches string="@{file}" pattern="_src\.js$" />
++					<then>
++						<propertyregex property="file.compressed" input="@{file}" regexp="_src.js$" replace=".js" override="yes" />
++					</then>
++					<else>
++						<propertyregex property="file.compressed" input="@{file}" regexp="\.js$" replace=".min.js" override="yes" />
++					</else>
++				</if>
+ 				<yuicompress infile="@{file}" outfile="${file.compressed}" />
  			</sequential>
  		</for>
- 
-+		<delete>
-+			<fileset dir="${build_dir}/plugins/" includes="**/js/*.min.js" />
-+		</delete>
-+		<for param="file">
-+			<path>
-+				<fileset dir="${build_dir}/plugins/" includes="**/js/*.js" />
-+			</path>
-+			<sequential>
-+				<propertyregex property="file.compressed" input="@{file}" regexp="\.js$" replace=".min.js" override="yes" />
-+				<yuicompress infile="@{file}" outfile="${file.compressed}" />
-+			</sequential>
-+		</for>
-+
- 		<!-- Compress jQuery plugin -->
- 		<yuicompress infile="${classes_dir}/adapter/jquery/jquery.tinymce.js" outfile="${build_dir}/jquery.tinymce.js" />
- 
-@@ -217,14 +230,17 @@
+@@ -217,14 +229,17 @@
  				<exclude name="**/.*/**"/>
  				<exclude name="**/.*"/>
  				<exclude name="build-utils/**" />
