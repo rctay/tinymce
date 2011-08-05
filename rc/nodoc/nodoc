@@ -11,3 +11,18 @@ index 159c314..d3999e4 100644
  		<mkdir dir="docs"/>
  		<delete quiet="true">
  			<fileset dir="docs/api" includes="**/*"/>
+diff --git a/readme.md b/readme.md
+index 6ffe960..fa49871 100644
+--- a/readme.md
++++ b/readme.md
+@@ -24,6 +24,10 @@ Will generate API Documentation for the project using the Moxiedoc tool. The doc
+ 
+ Will produce an release package of the current repository code. The release packages will be placed in the tmp directory.
+ 
++`ant release -Dnomoxiedoc=true`
++
++Same as above, but don't generate API Documentation.
++
+ Contributing to the TinyMCE project
+ ------------------------------------
+ You can read more about how to contribute to this project at [http://tinymce.moxiecode.com/contributing](http://tinymce.moxiecode.com/contributing)
