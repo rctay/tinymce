@@ -55,6 +55,9 @@ var ImageDialog = {
 			this.updateStyle();
 		}
 
+		if (f.src.value)
+			mcTabs.displayTab('existing_tab','existing_panel');
+
 		this.init_upload();
 	},
 
