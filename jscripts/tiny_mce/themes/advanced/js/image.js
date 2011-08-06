@@ -14,7 +14,7 @@ var ImageDialog = {
 				var str = window.location.search.substring(1);
 				var m;
 				while (m = re.exec(str))
-					if (m[1] == "url")
+					if (m[1] == "path")
 						return dec(m[2]);
 				return null;
 			};
@@ -262,6 +262,19 @@ var ImageDialog = {
 		this.preloadImg.onload = this.updateImageData;
 		this.preloadImg.onerror = this.resetImageData;
 		this.preloadImg.src = tinyMCEPopup.editor.documentBaseURI.toAbsolute(f.src.value);
+	},
+
+	handle_submit: function() {
+		var f = document.forms[0];
+
+		if (!f.image.value) {
+			this.update();
+			return false;
+		}
+
+		f.method = "post";
+		f.enctype = "multipart/form-data";
+		f.action = "/fountainpen/tinymce_upload/";
 	}
 };
 
